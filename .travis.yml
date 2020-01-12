@@ -8,11 +8,10 @@ sudo: false
 
 dist: bionic
 
-language: generic
+language: java
 
-env:
-  global:
-    - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+jdk:
+- oraclejdk8
 
 cache:
   directories:
@@ -27,7 +26,6 @@ addons:
     - libgmp-dev # needed by GHC
     # Isabelle:
     - curl
-    - default-jre
     - mercurial
     - p7zip-full
     - texlive-fonts-extra
