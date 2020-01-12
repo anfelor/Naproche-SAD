@@ -23,6 +23,7 @@ addons:
     - libgmp-dev # needed by GHC
     # Isabelle:
     - curl
+    - default-jre
     - mercurial
     - p7zip-full
     - texlive-fonts-extra
@@ -76,7 +77,7 @@ script:
 - stack --no-terminal test
 # Abort on all but one worker:
 - | 
-  if [ "$EVER" != "2.3" ] || [ `uname` = "Darwin" ] || [ 0 != 1 ]
+  if [ "$EVER" != "2.3" ] || [ `uname` = "Darwin" ]
   then
     travis_terminate 0
   fi
