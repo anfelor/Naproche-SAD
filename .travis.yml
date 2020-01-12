@@ -10,6 +10,10 @@ dist: bionic
 
 language: generic
 
+env:
+  global:
+    - JAVA_HOME=/usr/lib/jvm/java-8-oracle
+
 cache:
   directories:
   - "$HOME/.stack"
@@ -74,7 +78,7 @@ install:
 
 script:
 # Build the package, its tests, and its docs and run the tests
-- stack --no-terminal test
+# - stack --no-terminal test
 # Abort on all but one worker:
 - | 
   if [ "$EVER" != "2.3" ] || [ `uname` = "Darwin" ]
