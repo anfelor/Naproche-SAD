@@ -90,17 +90,18 @@ script:
 - |
   if [ ! -d "isabelle/.hg" ]
   then
-    hg clone https://isabelle.in.tum.de/repos/isabelle
+    hg clone https://isabelle.in.tum.de/repos/isabelle -r Isabelle2019
     cd isabelle
     ./bin/isabelle components -I
     ./bin/isabelle components -a
-    travis_wait 300 ./bin/isabelle build -o system_heaps -b HOL
     mkdir -p ~/.isabelle/etc
     touch ~/.isabelle/etc/settings
-    echo "init_component \"$HOME/build/$GITHUB_USER/Naproche-SAD\"" > ~/.isabelle/etc/settings
+    #sed -i "init_components \"$ISABELLE_COMPONENTS_BASE\" \"$ISABELLE_HOME/Admin/components/main\"" ~/.isabelle/etc/settings
+    travis_wait 300 ./bin/isabelle build -o system_heaps -b HOL
+    echo "init_component \"$HOME/build/$GITHUB_USER/Naproche-SAD\"" >> ~/.isabelle/etc/settings
   else
     cd isabelle
-    hg pull -u
+    hg pull -r Isabelle2019
     ./bin/isabelle components -a
     ./bin/isabelle build -o system_heaps -b HOL
   fi
