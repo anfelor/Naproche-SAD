@@ -96,12 +96,13 @@ script:
     ./bin/isabelle components -a
     mkdir -p ~/.isabelle/etc
     touch ~/.isabelle/etc/settings
-    #sed -i "init_components \"$ISABELLE_COMPONENTS_BASE\" \"$ISABELLE_HOME/Admin/components/main\"" ~/.isabelle/etc/settings
+    sed -i "init_components \"$ISABELLE_COMPONENTS_BASE\" \"$ISABELLE_HOME/Admin/components/main\"" ~/.isabelle/etc/settings
     travis_wait 300 ./bin/isabelle build -o system_heaps -b HOL
     echo "init_component \"$HOME/build/$GITHUB_USER/Naproche-SAD\"" >> ~/.isabelle/etc/settings
   else
     cd isabelle
     hg pull -r Isabelle2019
+    sed -i "init_components \"$ISABELLE_COMPONENTS_BASE\" \"$ISABELLE_HOME/Admin/components/main\"" ~/.isabelle/etc/settings
     ./bin/isabelle components -a
     ./bin/isabelle build -o system_heaps -b HOL
   fi
